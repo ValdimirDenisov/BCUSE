@@ -1,7 +1,6 @@
 pragma solidity >=0.8.0 <=0.9.0;
 
 contract Student {
-    address private owner;
     string surname = "";
     string name = "";
     string middle_name = "";
@@ -15,8 +14,6 @@ contract Student {
     string[] subjects;
     
     constructor (string[] memory en_personal_data, uint16[] memory en_score, string[] memory en_subjects) {
-        owner = msg.sender;
-        
         surname = en_personal_data[0];
         name = en_personal_data[1];
         middle_name = en_personal_data[2];
@@ -52,13 +49,10 @@ contract Student {
 }
 
 contract University {
-    address owner;
     mapping(string => address[]) students;
     string[] specialties;
     
     constructor (string[] memory en_spec) {
-        owner = msg.sender;
-        
         for (uint i = 0; i < en_spec.length; i++) {
             specialties.push(en_spec[i]);
         }
