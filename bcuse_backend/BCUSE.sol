@@ -4,6 +4,7 @@ contract Student {
     string surname = "";
     string name = "";
     string middle_name = "";
+    string school = "";
     string private login = "";
     bytes32 private password;
     
@@ -17,8 +18,9 @@ contract Student {
         surname = en_personal_data[0];
         name = en_personal_data[1];
         middle_name = en_personal_data[2];
-        login = en_personal_data[3];
-        password = keccak256(abi.encodePacked(en_personal_data[4]));
+        school = en_personal_data[3];
+        login = en_personal_data[4];
+        password = keccak256(abi.encodePacked(en_personal_data[5]));
 
         for (uint i = 0; i < en_score.length; i++) {
             sum_score += en_score[i];
@@ -28,9 +30,8 @@ contract Student {
     }
     
     function set_data(string[] memory en_uni, string[][] memory en_spec, string memory en_login, string memory en_password) public {
-        require(owner == msg.sender);
         require(keccak256(abi.encodePacked(en_login)) == keccak256(abi.encodePacked(login)));
-        require(keccak256(abi.encodePacked(en_password)) == keccak256(abi.encodePacked(password)));
+        require(keccak256(abi.encodePacked(en_password)) == password);
         
         for (uint i = 0; i < en_spec.length; i++) {
             universities[en_uni[i]] = 5 - uint16(i);
@@ -50,11 +51,13 @@ contract Student {
 
 contract University {
     mapping(string => address[]) students;
+    mapping(string => uint16) amount;
     string[] specialties;
     
-    constructor (string[] memory en_spec) {
+    constructor (string[] memory en_spec, uint16[] memory en_amount) {
         for (uint i = 0; i < en_spec.length; i++) {
             specialties.push(en_spec[i]);
+            amount[en_spec[i]] = en_amount[i];
         }
     }
     
@@ -72,7 +75,6 @@ contract University {
     }
     
     function add_student (address en_student, string memory en_spec) public {
-        require(owner == msg.sender);
         require(is_in_specialties(en_spec));
         
         students[en_spec].push(en_student);
