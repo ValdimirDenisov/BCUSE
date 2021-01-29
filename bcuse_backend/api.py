@@ -10,8 +10,8 @@ from web3 import Web3, HTTPProvider
 os.environ['WEB3_INFURA_PROJECT_ID'] = project_id
 w3 = Web3(HTTPProvider(url))
 
-university_cont = '0xcC30D20DfA1EBe92Ac947312572e505c7C270cE2'
-university_abi = [{"inputs":[{"internalType":"string[]","name":"en_spec","type":"string[]"},{"internalType":"uint16[]","name":"en_amount","type":"uint16[]"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"en_student","type":"address"},{"internalType":"string","name":"en_spec","type":"string"}],"name":"add_student","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"en_spec","type":"string"}],"name":"get_all_students_for_speciality","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"}]
+university_cont = '0x3f0b024851f5e3a64451b894e89a82b892e833b1'
+university_abi = [{"inputs":[{"internalType":"string","name":"en_name","type":"string"},{"internalType":"string[]","name":"en_spec","type":"string[]"},{"internalType":"uint16[]","name":"en_amount","type":"uint16[]"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"en_student","type":"address"},{"internalType":"string","name":"en_spec","type":"string"}],"name":"add_student","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"en_spec","type":"string"}],"name":"get_all_students_for_speciality","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"}]
 
 BCUSE_university = w3.eth.contract(
     address=university_cont,
