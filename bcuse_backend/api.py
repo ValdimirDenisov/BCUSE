@@ -3,6 +3,12 @@ from flask_api import FlaskAPI, status, exceptions
 
 app = FlaskAPI(__name__)
 
+students = [
+	"Asd": ["Asd", "0xAsd"],
+	"Qwe": ["Qwe", "0xQwe"],
+	"Zxc": ["Zxc", "0xZxc"]
+]
+
 @app.route("/student/<string:university>", methods=['GET'])
 def student_get(university):
 	if request.method == 'GET':
@@ -58,12 +64,12 @@ def university_get(spec):
 def university_post():
 	if request.method == 'POST':
 		#POST request example
-		#{"address": "0x...", "spec": "polit"}
+		#{"login": "Asd", "spec": "polit"}
 		
-		address = request.form.get('address')
-		if address is None:
-			return jsonify("Specify address"), 400
-		
+		login = request.form.get('login')
+		if login is None:
+			return jsonify("Specify login"), 400
+		address = students[login][1]
 		spec = request.form.get('spec')
 		if spec is None:
 			return jsonify("Specify speciality (spec)"), 400
