@@ -3,11 +3,11 @@ from flask_api import FlaskAPI, status, exceptions
 
 app = FlaskAPI(__name__)
 
-students = [
+students = {
 	"Asd": ["Asd", "0xAsd"],
 	"Qwe": ["Qwe", "0xQwe"],
 	"Zxc": ["Zxc", "0xZxc"]
-]
+}
 
 @app.route("/student/<string:university>", methods=['GET'])
 def student_get(university):
